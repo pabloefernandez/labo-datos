@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+
+import pandas as pd
+from inline_sql import sql, sql_val
+import numpy as np
+
+
+padron= pd.read_csv("padron-de-operadores-organicos-certificados.csv")
+
+
+print(padron)
+
+padroncito = sql^(" SELECT productos, razon_social, establecimiento FROM padron")
+tabla_productos  = pd.DataFrame(columns=['establecimiento' , 'razon_social', 'productos'])
+
+def primera_forma_normal(df):
+   for i in range(len(df)):
+        productos = df.iloc[i,0].split(",")
+        for producto in productos:
+            producto = producto.lstrip()
+            tabla_productos.loc[len(tabla_productos)] = [df.iloc[i,1],df.iloc[i,2],producto] 
+    
+       
+   return tabla_productos    
+        
+        
+print(primera_forma_normal(padroncito))
