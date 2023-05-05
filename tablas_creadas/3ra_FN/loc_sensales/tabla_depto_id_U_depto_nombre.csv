@@ -1,0 +1,512 @@
+departamento_id,departamento_nombre
+6014.0,Adolfo Gonzales Chaves
+6063.0,Balcarce
+26007.0,Biedma
+30015.0,Concordia
+6070.0,Baradero
+6084.0,Benito Juárez
+66126.0,Orán
+6021.0,Alberti
+6077.0,Arrecifes
+6028.0,Almirante Brown
+6035.0,Avellaneda
+6042.0,Ayacucho
+6049.0,Azul
+6056.0,Bahía Blanca
+6091.0,Berazategui
+6098.0,Berisso
+6105.0,Bolívar
+6112.0,Bragado
+,
+6007.0,Adolfo Alsina
+6119.0,Brandsen
+6126.0,Campana
+6134.0,Cañuelas
+6140.0,Capitán Sarmiento
+6147.0,Carlos Casares
+6154.0,Carlos Tejedor
+6161.0,Carmen de Areco
+6168.0,Castelli
+6175.0,Colón
+6182.0,Coronel de Marina Leonardo Rosales
+6189.0,Coronel Dorrego
+6196.0,Coronel Pringles
+6203.0,Coronel Suárez
+6210.0,Chacabuco
+6217.0,Chascomús
+6224.0,Chivilcoy
+6231.0,Daireaux
+6238.0,Dolores
+6245.0,Ensenada
+6252.0,Escobar
+6260.0,Esteban Echeverría
+6266.0,Exaltación de la Cruz
+6270.0,José M. Ezeiza
+6274.0,Florencio Varela
+6277.0,Florentino Ameghino
+6280.0,General Alvarado
+6287.0,General Alvear
+6294.0,General Arenales
+6301.0,General Belgrano
+6308.0,General Guido
+6315.0,General Juan Madariaga
+6322.0,General La Madrid
+6329.0,General Las Heras
+6336.0,General Lavalle
+6343.0,General Paz
+6351.0,General Pinto
+6357.0,General Pueyrredón
+6364.0,General Rodríguez
+6371.0,Ciudad Libertador San Martín
+6385.0,General Viamonte
+6392.0,General Villegas
+6399.0,Guaminí
+6406.0,Hipólito Yrigoyen
+6408.0,Hurlingham
+6410.0,Ituzaingó
+6412.0,José C. Paz
+6413.0,Junín
+6420.0,La Costa
+6427.0,La Matanza
+6434.0,Lanús
+6441.0,La Plata
+6448.0,Laprida
+6455.0,Las Flores
+6462.0,Leandro N. Alem
+6469.0,Lincoln
+6476.0,Lobería
+6483.0,Lobos
+6490.0,Lomas de Zamora
+6497.0,Luján
+6505.0,Magdalena
+6511.0,Maipú
+6515.0,Malvinas Argentinas
+6518.0,Mar Chiquita
+6525.0,Marcos Paz
+6532.0,Mercedes
+6539.0,Merlo
+6547.0,Monte
+6553.0,Monte Hermoso
+6560.0,Moreno
+6568.0,Morón
+6574.0,Navarro
+6581.0,Necochea
+6588.0,9 de Julio
+6595.0,Olavarría
+6602.0,Patagones
+6609.0,Pehuajó
+6616.0,Pellegrini
+6623.0,Pergamino
+6630.0,Pila
+6638.0,Pilar
+6644.0,Pinamar
+6648.0,Presidente Perón
+6651.0,Puán
+6655.0,Punta Indio
+6658.0,Quilmes
+6665.0,Ramallo
+6672.0,Rauch
+6679.0,Rivadavia
+6686.0,Rojas
+6693.0,Roque Pérez
+6700.0,Saavedra
+6707.0,Saladillo
+6714.0,Salto
+6721.0,Salliqueló
+6728.0,San Andrés de Giles
+6735.0,San Antonio de Areco
+6742.0,San Cayetano
+6749.0,San Fernando
+6756.0,San Isidro
+6760.0,San Miguel
+6763.0,San Nicolás
+6770.0,San Pedro
+6778.0,San Vicente
+6784.0,Suipacha
+6791.0,Tandil
+6798.0,Tapalqué
+6805.0,Tigre
+6812.0,Tordillo
+6819.0,Tornquist
+6826.0,Trenque Lauquen
+6833.0,Tres Arroyos
+6840.0,Tres de Febrero
+6847.0,Tres Lomas
+6854.0,25 de Mayo
+6861.0,Vicente López
+6868.0,Villa Gesell
+6875.0,Villarino
+6882.0,Zárate
+10014.0,Ancasti
+10021.0,Andalgalá
+10028.0,Antofagasta de la Sierra
+10035.0,Belén
+10042.0,Capayán
+10049.0,Capital
+10056.0,El Alto
+10063.0,Fray Mamerto Esquiú
+10070.0,La Paz
+10077.0,Paclín
+10084.0,Pomán
+10091.0,Santa María
+10098.0,Santa Rosa
+10105.0,Tinogasta
+10112.0,Valle Viejo
+14007.0,Calamuchita
+14014.0,Capital
+14021.0,Colón
+14028.0,Cruz del Eje
+14035.0,General Roca
+14042.0,General San Martín
+14049.0,Ischilín
+14056.0,Juárez Celman
+14063.0,Marcos Juárez
+14070.0,Minas
+14077.0,Pocho
+14084.0,Presidente Roque Sáenz Peña
+14091.0,Punilla
+14098.0,Río Cuarto
+14105.0,Río Primero
+14112.0,Río Seco
+14119.0,Río Segundo
+14126.0,San Alberto
+14133.0,San Javier
+14140.0,San Justo
+14147.0,Santa María
+14154.0,Sobremonte
+14161.0,Tercero Arriba
+14168.0,Totoral
+14182.0,Unión
+18007.0,Bella Vista
+18014.0,Berón de Astrada
+18021.0,Capital
+18028.0,Concepción
+18035.0,Curuzu Cuatia
+18042.0,Empedrado
+18049.0,Esquina
+18056.0,General Alvear
+18063.0,General Paz
+18070.0,Goya
+18077.0,Itatí
+18084.0,Ituzaingó
+18091.0,Lavalle
+18098.0,Mburucuyá
+18112.0,Monte Caseros
+18119.0,Paso de los Libres
+18126.0,Saladas
+18133.0,San Cosme
+18140.0,San Luis del Palmar
+18147.0,San Martín
+18154.0,San Miguel
+18161.0,San Roque
+18168.0,Santo Tomé
+18175.0,Sauce
+22007.0,Almirante Brown
+22014.0,Bermejo
+22021.0,Comandante Fernández
+22028.0,Chacabuco
+22036.0,12 de Octubre
+22039.0,2 de Abril
+22043.0,Fray Justo Santa María de Oro
+22049.0,General Belgrano
+22056.0,General Donovan
+22063.0,General Güemes
+22070.0,Independencia
+22077.0,Libertad
+22084.0,Libertador General San Martín
+22091.0,Maipú
+22098.0,Mayor Luis J. Fontana
+22105.0,9 de Julio
+22112.0,O'Higgins
+22119.0,Presidencia de la Plaza
+22126.0,1° de Mayo
+22133.0,Quitilipi
+22140.0,San Fernando
+22147.0,San Lorenzo
+22154.0,Sargento Cabral
+22161.0,Tapenagá
+22168.0,25 de Mayo
+26014.0,Cushamen
+26021.0,Escalante
+26028.0,Florentino Ameghino
+26035.0,Futaleufú
+26042.0,Gaiman
+26049.0,Gastre
+26056.0,Languiñeo
+26063.0,Mártires
+26070.0,Paso de Indios
+26077.0,Rawson
+26098.0,Tehuelches
+26105.0,Telsen
+30008.0,Colón
+30021.0,Diamante
+30028.0,Federación
+30035.0,Federal
+30042.0,Feliciano
+30049.0,Gualeguay
+30056.0,Gualeguaychú
+30063.0,Islas del Ibicuy
+30070.0,La Paz
+30077.0,Nogoyá
+30084.0,Paraná
+30088.0,San Salvador
+30098.0,Uruguay
+30105.0,Victoria
+30113.0,Villaguay
+34007.0,Bermejo
+34014.0,Formosa
+34021.0,Laishí
+34028.0,Matacos
+34042.0,Pilagás
+34049.0,Pilcomayo
+34056.0,Pirané
+34063.0,Ramón Lista
+38007.0,Cochinoca
+38014.0,El Carmen
+38021.0,Dr. Manuel Belgrano
+38028.0,Humahuaca
+38035.0,Ledesma
+38042.0,Palpalá
+38049.0,Rinconada
+38056.0,San Antonio
+38063.0,San Pedro
+38070.0,Santa Bárbara
+38077.0,Santa Catalina
+38084.0,Susques
+38094.0,Tilcara
+38098.0,Tumbaya
+38112.0,Yaví
+42007.0,Atreucó
+42014.0,Caleu Caleu
+42021.0,Capital
+42028.0,Catriló
+42035.0,Conhelo
+42042.0,Curacó
+42049.0,Chalileo
+42063.0,Chical Co
+42077.0,Hucal
+42084.0,Lihuel Calel
+42091.0,Limay Mahuida
+42098.0,Loventué
+42105.0,Maracó
+42112.0,Puelén
+42119.0,Quemú Quemú
+42126.0,Rancul
+42133.0,Realicó
+42140.0,Toay
+42147.0,Trenel
+42154.0,Utracán
+46007.0,Arauco
+46014.0,Capital
+46021.0,Castro Barros
+46028.0,Coronel Felipe Varela
+46035.0,Chamical
+46042.0,Chilecito
+46049.0,Famatina
+46056.0,General Ángel V. Peñaloza
+46063.0,General Belgrano
+46070.0,General Juan F. Quiroga
+46077.0,General Lamadrid
+46084.0,General Ocampo
+46091.0,General San Martín
+46098.0,Vinchina
+46105.0,Independencia
+46112.0,Rosario Vera Peñaloza
+46119.0,San Blas de Los Sauces
+46126.0,Sanagasta
+50007.0,Capital
+50014.0,General Alvear
+50021.0,Godoy Cruz
+50035.0,Junín
+50042.0,La Paz
+50049.0,Las Heras
+50056.0,Lavalle
+50063.0,Luján de Cuyo
+50070.0,Maipú
+50077.0,Malargüe
+50084.0,Rivadavia
+50091.0,San Carlos
+50098.0,San Martín
+50105.0,San Rafael
+50112.0,Santa Rosa
+50119.0,Tunuyán
+50126.0,Tupungato
+54007.0,Apóstoles
+54014.0,Cainguás
+54021.0,Candelaria
+54035.0,Concepción
+54042.0,Eldorado
+54049.0,General Manuel Belgrano
+54056.0,Guaraní
+54070.0,Leandro N. Alem
+54077.0,Libertador General San Martín
+54084.0,Montecarlo
+54091.0,Oberá
+54098.0,San Ignacio
+54105.0,San Javier
+54112.0,San Pedro
+54119.0,25 de Mayo
+58007.0,Aluminé
+58014.0,Añelo
+58021.0,Catán Lil
+58028.0,Collón Curá
+58035.0,Confluencia
+58042.0,Chos Malal
+58049.0,Huiliches
+58056.0,Lácar
+58063.0,Loncopué
+58070.0,Los Lagos
+58077.0,Minas
+58084.0,Ñorquín
+58091.0,Pehuenches
+58098.0,Picún Leufú
+58105.0,Picunches
+58112.0,Zapala
+62007.0,Adolfo Alsina
+62021.0,Bariloche
+62028.0,Conesa
+62035.0,El Cuy
+62042.0,General Roca
+62049.0,9 de julio
+62056.0,Ñorquinco
+62063.0,Pichi Mahuida
+62070.0,Pilcaniyeu
+62084.0,Valcheta
+62091.0,25 de Mayo
+66014.0,Cachi
+66028.0,Capital
+66035.0,Cerrillos
+66042.0,Chicoana
+66056.0,General José de San Martín
+66063.0,Guachipas
+66070.0,Iruya
+66077.0,La Caldera
+66084.0,La Candelaria
+66091.0,La Poma
+66098.0,La Viña
+66105.0,Los Andes
+66112.0,Metán
+66119.0,Molinos
+66133.0,Rivadavia
+66140.0,Rosario de la Frontera
+66147.0,Rosario de Lerma
+66154.0,San Carlos
+66161.0,Santa Victoria
+70007.0,Albardón
+70014.0,Angaco
+70021.0,Calingasta
+70028.0,Capital
+70035.0,Caucete
+70042.0,Chimbas
+70049.0,Iglesia
+70056.0,Jáchal
+70063.0,9 de Julio
+70070.0,Pocito
+70077.0,Rawson
+70084.0,Rivadavia
+70098.0,Santa Lucía
+70105.0,Sarmiento
+70112.0,Ullum
+70126.0,25 de Mayo
+70133.0,Zonda
+74007.0,Ayacucho
+74014.0,Belgrano
+74021.0,Coronel Pringles
+74028.0,Chacabuco
+74035.0,General Pedernera
+74042.0,Gobernador Dupuy
+74049.0,Junín
+78007.0,Corpen Aike
+78014.0,Deseado
+78021.0,Güer Aike
+78028.0,Lago Argentino
+78035.0,Lago Buenos Aires
+78042.0,Magallanes
+78049.0,Río Chico
+82007.0,Belgrano
+82014.0,Caseros
+82028.0,Villa Constitución
+82035.0,Garay
+82049.0,General Obligado
+82056.0,Iriondo
+82063.0,La Capital
+82070.0,Las Colonias
+82077.0,9 de Julio
+82091.0,San Cristóbal
+82098.0,San Javier
+82105.0,San Jerónimo
+82126.0,San Martín
+82133.0,Vera
+86007.0,Aguirre
+86014.0,Alberdi
+86021.0,Atamisqui
+86028.0,Avellaneda
+86035.0,Banda
+86042.0,Belgrano
+86049.0,Capital
+86056.0,Copo
+86063.0,Choya
+86070.0,Figueroa
+86077.0,General Taboada
+86084.0,Guasayán
+86091.0,Jiménez
+86098.0,Juan F. Ibarra
+86105.0,Loreto
+86112.0,Mitre
+86119.0,Moreno
+86126.0,Ojo de Agua
+86133.0,Pellegrini
+86140.0,Quebrachos
+86147.0,Río Hondo
+86154.0,Rivadavia
+86168.0,Salavina
+86175.0,San Martín
+86182.0,Sarmiento
+86189.0,Silípica
+90021.0,Chicligasta
+90028.0,Famaillá
+90035.0,Graneros
+90042.0,Juan Bautista Alberdi
+90070.0,Monteros
+90077.0,Río Chico
+90084.0,Capital
+90091.0,Simoca
+90049.0,La Cocha
+90056.0,Leales
+90063.0,Lules
+90098.0,Tafí del Valle
+90105.0,Tafí Viejo
+90112.0,Trancas
+90119.0,Yerba Buena
+94015.0,Ushuaia
+94008.0,Río Grande
+10007.0,Ambato
+14175.0,Tulumba
+18105.0,Mercedes
+26084.0,Río Senguer
+26091.0,Sarmiento
+30091.0,Tala
+34035.0,Patiño
+38105.0,Valle Grande
+42056.0,Chapaleufú
+42070.0,Guatraché
+54028.0,Capital
+62014.0,Avellaneda
+62077.0,San Antonio
+66007.0,Anta
+66021.0,Cafayate
+66049.0,General Güemes
+70091.0,San Martín
+70119.0,Valle Fértil
+82021.0,Castellanos
+82042.0,General López
+82084.0,Rosario
+82112.0,San Justo
+82119.0,San Lorenzo
+86161.0,Robles
+90007.0,Burruyacú
+90014.0,Cruz Alta
+50028.0,Guaymallén
+54063.0,Iguazú
+74056.0,Juan Martín de Pueyrredón
+74063.0,Libertador General San Martín

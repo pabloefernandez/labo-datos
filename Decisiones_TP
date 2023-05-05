@@ -1,1 +1,21 @@
 Que hacemos con la columna categoria ID que tiene siempre el mismo valor?
+
+
+
+
+
+
+
+
+COLUMNAS QUE NO ESTAN EN 1RA FORMA NORMAL
+-Rubro de "padron"
+- productos de "padron"
+- clae2_desc y letra_desc
+
+
+
+
+
+CONSIDERACIONES/CONSULTAS HECHAS
+-Verificamos que la por no existe una combinacion de municipio + departamento en 2 o mas provincias. Es decir que un muniicipio y su depto es unico por provincia.
+
