@@ -3,23 +3,55 @@
 import pandas as pd
 from inline_sql import sql, sql_val
 import numpy as np
-
+"""
 
 padron= pd.read_csv("padron-de-operadores-organicos-certificados.csv")
 #dict_salario = pd.read_csv("")
 localidades_censales =  pd.read_csv("localidades-censales.csv")
 dict_deptos =  pd.read_csv("diccionario_cod_depto.csv")
 dict_act = pd.read_csv("diccionario_clae2.csv")
+"""
+productos = pd.read_csv('/home/tsl2004/Escritorio/labo-datos/tablas_creadas/1ra_FN/padron/tabla_productos_mod.csv')
 
 
 #CONSULTAS
 
-padroncito = sql^(" SELECT productos, razon_social, establecimiento FROM padron")
+#padroncito = sql^(" SELECT productos, razon_social, establecimiento FROM padron")
+
+
+tabla_productos_modificada  = pd.DataFrame(columns=['establecimiento' , 'razon_social', 'productos'])
 
 
 
- 
-        
+
+                                  
+                                  
+
+#FUNCIONES  
+  
+def primera_forma_normal_productos(df,nuevo_df):
+   for i in range(len(df)):
+        productos = df.iloc[i,2].split(" Y ")
+        productos = df.iloc[i,2].split(" y ")
+        for producto in productos:
+            producto = producto.lstrip()
+            nuevo_df.loc[len(nuevo_df)] = [df.iloc[i,0],df.iloc[i,1],producto] 
+   return nuevo_df
+
+print(primera_forma_normal_productos(productos, tabla_productos_modificada))
+
+#def primera_forma_normal_rubro(df,nuevo_df)
+
+tabla_rubros  = pd.DataFrame(columns=['establecimiento' , 'razon_social', 'productos'])
+    
+
+
+#TABLAS CREADAS}
+#tabla_productos  = pd.DataFrame(columns=['establecimiento' , 'razon_social', 'productos'])
+#tabla_productos.to_csv("tabla_productos.csv",index= False)
+
+"""
+TODO A 3RA FORMA 
 #PADRON 3RA FORMA
 copia_padron = padron.copy()
 copia_padron = sql^("SELECT DISTINCT pais_id, provincia_id, departamento,localidad, rubro, categoria_id, Certificadora_id,razon_social, establecimiento FROM padron")
@@ -85,27 +117,4 @@ tabla_letra_U_letra_desc.to_csv("tabla_letra_U_letra_desc.csv",index= False)
 tabla_clae2_U_clae2.to_csv("tabla_clae2_U_clae2.csv",index= False)
 
 
-
-
-
-
-
-                                  
-                                  
-
-#FUNCIONES  
-  
-def primera_forma_normal_productos(df,nuevo_df):
-   for i in range(len(df)):
-        productos = df.iloc[i,0].split(",")
-        for producto in productos:
-            producto = producto.lstrip()
-            nuevo_df.loc[len(nuevo_df)] = [df.iloc[i,1],df.iloc[i,2],producto] 
-   return nuevo_df
-
-    
-
-
-#TABLAS CREADAS}
-#tabla_productos  = pd.DataFrame(columns=['establecimiento' , 'razon_social', 'productos'])
-#tabla_productos.to_csv("tabla_productos.csv",index= False)
+"""
