@@ -1,35 +1,15 @@
 #!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Sun May  7 12:51:13 2023
 
-import pandas as pd
-from inline_sql import sql, sql_val
-import numpy as np
-import re 
+@author: tsl2004
+"""
 
+TODO A 1RA FORMA
+#TABLA PRODUCTOS
+tabla_productos  = pd.DataFrame(columns=['establecimiento' , 'razon_social', 'productos'])
 
-padron= pd.read_csv("/home/tsl2004/Escritorio/labo-datos/tablas_originales_en_1raFN/Padron_en_3raFN.csv")
-#dict_salario = pd.read_csv("")
-localidades_censales =  pd.read_csv("localidades-censales.csv")
-dict_deptos =  pd.read_csv("diccionario_cod_depto.csv")
-dict_act = pd.read_csv("diccionario_clae2.csv")
-
-tabla_productos = pd.read_csv('/home/tsl2004/Escritorio/labo-datos/tablas_creadas/1ra_FN/padron/tabla_productos_mod.csv')
-
-
-#CONSULTAS
-
-padroncito = sql^(" SELECT razon_social,establecimiento, rubro FROM padron")
-
-
-tabla_productos_modificada  = pd.DataFrame(columns=['establecimiento' , 'razon_social', 'productos'])
-
-
-
-
-                                  
-                                  
-
-#FUNCIONES  
-  
 def primera_forma_normal_productos(df,nuevo_df):
    for i in range(len(df)):
         productos = df.iloc[i,2].split(" Y ")
@@ -38,9 +18,14 @@ def primera_forma_normal_productos(df,nuevo_df):
             nuevo_df.loc[len(nuevo_df)] = [df.iloc[i,0],df.iloc[i,1],producto] 
    return nuevo_df
 
-#print(primera_forma_normal_productos(productos, tabla_productos_modificada))
+print(primera_forma_normal_productos(productos, tabla_productos_modificada))
 
+tabla_productos.to_csv("tabla_productos.csv",index= False)
+
+#tabla_productos_modificada  = pd.DataFrame(columns=['establecimiento' , 'razon_social', 'productos'])
 #tabla_productos_modificada.to_csv("tabla_productos_mod.csv",index= False)
+
+#TABLA RUBRO
 
 tabla_rubros  = pd.DataFrame(columns=['establecimiento' , 'razon_social', 'rubro'])
 
@@ -54,17 +39,13 @@ def primera_forma_normal_rubro(df,nuevo_df):
 
 print(primera_forma_normal_rubro(padroncito, tabla_rubros))
 
-tabla_rubros.to_csv("rubros_en1FN", index = False)
+tabla_rubros.to_csv("rubros_en1FN.csv", index = False)
 
 
-#TABLAS CREADAS}
-#tabla_productos  = pd.DataFrame(columns=['establecimiento' , 'razon_social', 'productos'])
-#tabla_productos.to_csv("tabla_productos.csv",index= False)
 
-#tabla_productos_modificada  = pd.DataFrame(columns=['establecimiento' , 'razon_social', 'productos'])
-#tabla_productos_modificada.to_csv("tabla_productos_mod.csv",index= False)
 
-"""
+
+
 TODO A 3RA FORMA 
 #PADRON 3RA FORMA
 copia_padron = padron.copy()
@@ -89,16 +70,16 @@ copia_dict_deptos = sql^("SELECT codigo_departamento_indec, id_provincia_indec F
 tabla_prov_id_U_prov_nombre2 = sql^("SELECT DISTINCT id_provincia_indec, nombre_provincia_indec FROM dict_deptos")
 tabla_codigo_depto_U_nombre_depto = sql^("SELECT DISTINCT codigo_departamento_indec, nombre_departamento_indec FROM dict_deptos")
 
-
-
-
-
-
 #DICT_ACT
 copia_dict_act = dict_act.copy()
 copia_dict_act =  sql^("SELECT clae2, letra FROM dict_act ")
 tabla_letra_U_letra_desc = sql^("SELECT DISTINCT letra, letra_desc FROM dict_act")
 tabla_clae2_U_clae2 = sql^("SELECT DISTINCT clae2, clae2_desc FROM dict_act")
+
+
+
+
+
 
 
 #PADRON 3RA FORMA A CSV 
@@ -131,4 +112,3 @@ tabla_letra_U_letra_desc.to_csv("tabla_letra_U_letra_desc.csv",index= False)
 tabla_clae2_U_clae2.to_csv("tabla_clae2_U_clae2.csv",index= False)
 
 
-"""
