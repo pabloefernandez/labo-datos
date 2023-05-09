@@ -2,11 +2,6 @@ DROP DATABASE IF EXISTS padron;
 CREATE DATABASE padron;
 USE padron;
 
-CREATE TABLE Localidad(
-localidad_id INT,
-localidad VARCHAR(50),
-CONSTRAINT PK_localidad PRIMARY KEY (localidad_id)
-)engine=innodb;
 
 CREATE TABLE Departamento(
 departamento_id INT,
@@ -35,7 +30,7 @@ CONSTRAINT PK_letra PRIMARY KEY (letra)
 CREATE TABLE Categoria ( /* SOLO TIENE PRODUCTORES */
 categoria_id INT,
 categoria_desc VARCHAR(20),
-CONSTRAINT PK_categoria_id PRIMARY KEY (categoria_id) 
+CONSTRAINT PK_categoria_id PRIMARY KEY (categoria_id)
 )engine=innodb;
 
 CREATE TABLE Certificadora(
@@ -50,6 +45,7 @@ municipio_nombre VARCHAR(50),
 CONSTRAINT PK_municipio_id PRIMARY KEY (municipio_id)
 )engine=innodb;
 
+
 CREATE TABLE Municipio_Departamento_Provincia(
 municipio_id INT,
 departamento_id INT,
@@ -60,9 +56,24 @@ CONSTRAINT FK_municipio_id FOREIGN KEY (municipio_id) REFERENCES Municipio (muni
 CONSTRAINT FK_departamento_id FOREIGN KEY (departamento_id) REFERENCES Departamento (departamento_id)
 )engine=innodb;
 
-CREATE TABLE Padron( 
-razon_social VARCHAR(20), 
-establecimiento VARCHAR(20), 
+
+CREATE TABLE Localidades_Censales(
+id INT,
+nombre VARCHAR(50),
+categoria VARCHAR(50),
+centroide_lat VARCHAR(50),
+centroide_lon VARCHAR(50),
+departamento_id INT,
+fuente VARCHAR(10),
+municipio_id INT,
+CONSTRAINT PK_id PRIMARY KEY (id),
+CONSTRAINT FK_depto FOREIGN KEY (municipio_id,departamento_id) REFERENCES Municipio_Departamento_Provincia (municipio_id,departamento_id)
+)engine=innodb;
+
+
+CREATE TABLE Padron(
+razon_social VARCHAR(20),
+establecimiento VARCHAR(20),
 pais_id INT,
 provincia_id INT,
 categoria_id INT,
@@ -76,15 +87,31 @@ CONSTRAINT FK_categoria_id FOREIGN KEY (categoria_id) REFERENCES Categoria (cate
 CONSTRAINT FK_certificadora_id FOREIGN KEY (certificadora_id) REFERENCES Certificadora (certificadora_id)
 )engine=innodb;
 
-CREATE TABLE Rubro ( 
+CREATE TABLE Diccionario_clae2(
+clae2 INT,
+clae2_desc VARCHAR(50),
+letra CHAR,
+CONSTRAINT PK_clae2 PRIMARY KEY (clae2),
+CONSTRAINT FK_letra FOREIGN KEY (letra) REFERENCES Letra(letra)
+)engine=innodb;
+
+CREATE TABLE Rubro_Clae2(
+rubro VARCHAR(50),
+clae2 INT,
+CONSTRAINT PK_rubro PRIMARY KEY (rubro),
+CONSTRAINT FK_fk FOREIGN KEY (clae2) REFERENCES Diccionario_clae2(clae2)
+)engine=innodb;
+
+CREATE TABLE Rubro_Razon_Social_Establecimiento (
 razon_social VARCHAR(20),
 establecimiento VARCHAR(20),
 rubro VARCHAR(20),
 CONSTRAINT PK_pk PRIMARY KEY (establecimiento,razon_social),
-CONSTRAINT FK_primarykey FOREIGN KEY (establecimiento,razon_social) REFERENCES Padron (establecimiento,razon_social)
+CONSTRAINT FK_primarykey FOREIGN KEY (establecimiento,razon_social) REFERENCES Padron (establecimiento,razon_social),
+CONSTRAINT FK_rubro FOREIGN KEY (rubro) REFERENCES Rubro_Clae2 (rubro)
 )engine=innodb;
 
-CREATE TABLE Producto( /* PRODUCTO DETERMINA RUBRO? */
+CREATE TABLE Producto(
 razon_social VARCHAR(20),
 establecimiento VARCHAR(20),
 producto VARCHAR(30),
@@ -92,4 +119,14 @@ CONSTRAINT PK_pkk PRIMARY KEY (establecimiento,razon_social),
 CONSTRAINT FK_razon FOREIGN KEY (establecimiento,razon_social) REFERENCES Padron (establecimiento,razon_social)
 )engine=innodb;
 
-/* CLAE2 TIENE RUBROS TAMBIEN, OTRA TABLA? */
+CREATE TABLE Salario_Medio(
+codigo_departamento_indec INT,
+id_provincia_indec INT,
+clae2 INT,
+fecha DATE,
+w_median INT,
+CONSTRAINT PK_pk PRIMARY KEY (codigo_departamento_indec,id_provincia_indec),
+CONSTRAINT FK_fk22 FOREIGN KEY (codigo_departamento_indec) REFERENCES Departamento (departamento_id),
+CONSTRAINT FK_fk23 FOREIGN KEY (id_provincia_indec) REFERENCES Provincia (provincia_id),
+CONSTRAINT FK_fk33 FOREIGN KEY (clae2) REFERENCES Diccionario_clae2 (clae2)
+)engine=innodb;
