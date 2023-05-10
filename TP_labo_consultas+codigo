@@ -54,7 +54,8 @@ def primera_forma_normal_rubro(df,nuevo_df):
 
 print(primera_forma_normal_rubro(padroncito, tabla_rubros))
 
-tabla_rubros.to_csv("rubros_en1FN", index = False)
+tabla_rubros.to_csv("rubros_en1FN.csv", index = False)
+
 
 
 #TABLAS CREADAS}
