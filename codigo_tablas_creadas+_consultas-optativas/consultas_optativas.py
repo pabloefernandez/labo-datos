@@ -33,3 +33,5 @@ consulta_de_provincia_misma_dep_y_muni = """
                  FROM tabla_rubros
                  GROUP BY rubro
                  """
+                 
+#consulta para en loc sensales en tubla en 1ra forma de provincias cambiamos el nombre de tierra del fuego y el de Capital por CABA

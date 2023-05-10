@@ -3,7 +3,7 @@
 import pandas as pd
 from inline_sql import sql, sql_val
 import numpy as np
-import re 
+
 
 
 padron= pd.read_csv("/home/tsl2004/Escritorio/labo-datos/tablas_originales_en_1raFN/Padron_en_3raFN.csv")
@@ -11,6 +11,21 @@ padron= pd.read_csv("/home/tsl2004/Escritorio/labo-datos/tablas_originales_en_1r
 localidades_censales =  pd.read_csv("localidades-censales.csv")
 dict_deptos =  pd.read_csv("diccionario_cod_depto.csv")
 dict_act = pd.read_csv("diccionario_clae2.csv")
+padron= pd.read_csv("Padron_en_3raFN.csv")
+provincias =pd.read_csv("tabla_provincia_id_U_provincia.csv")
+
+ej1 = sql^consulta_1
+consulta_1 = """
+                SELECT DISTINCT provincias.provincia, count(*) as cant_operadores 
+                FROM padron
+                INNER JOIN provincias
+                ON provincias.provincia_id = padron.provincia_id
+                GROUP BY provincias.provincia;
+
+
+             """
+print(ej1)
+
 
 tabla_productos = pd.read_csv('/home/tsl2004/Escritorio/labo-datos/tablas_creadas/1ra_FN/padron/tabla_productos_mod.csv')
 
@@ -54,8 +69,7 @@ def primera_forma_normal_rubro(df,nuevo_df):
 
 print(primera_forma_normal_rubro(padroncito, tabla_rubros))
 
-tabla_rubros.to_csv("rubros_en1FN.csv", index = False)
-
+tabla_rubros.to_csv("rubros_en1FN", index = False)
 
 
 #TABLAS CREADAS}
