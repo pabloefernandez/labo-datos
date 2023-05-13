@@ -22,6 +22,30 @@ consulta_1 = """
              """
 print(ej1)
 
+ej2 = sql^consulta_2
+consulta2 = 
+                """
+                SELECT DISTINCT loc.sensales.departamentos
+                FROM loc sensales
+                EXCEPT(
+                    SELECT DISTINCT padron.departamentos
+                    FROM padron
+                    )
+
+                """
+                
+consulta3 = 
+                """
+                SELECT padron.rubro, COUNT(*)
+                FROM padron
+                INNER JOIN tabla_productos_en_1FN
+                ON establecimiento = establecimiento and razon_social = razon_social
+                INNER JOIN rubro.rubro_clae2
+                ON rubro_clae_2
+                GROUP BY rubro 
+               """
+ej3 = sql^consulta_3
+            
 
 tabla_productos = pd.read_csv('/home/tsl2004/Escritorio/labo-datos/tablas_creadas/1ra_FN/padron/tabla_productos_mod.csv')
 
