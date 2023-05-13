@@ -1,7 +1,7 @@
-rubro,clae2
-AGRICULTURA,1
-FRUTICULTURA,1
-HORTICULTURA,1
-GANADERIA,1
-APICULTURA,1
-RECOLECCION SILVESTRE,1
+rubro,clae2,clae2_desc
+AGRICULTURA,1,"Agricultura, ganadería, caza y servicios relacionados "
+FRUTICULTURA,1,"Agricultura, ganadería, caza y servicios relacionados "
+HORTICULTURA,999,Otros sectores
+GANADERIA,1,"Agricultura, ganadería, caza y servicios relacionados "
+APICULTURA,999,Otros sectores
+RECOLECCION SILVESTRE,2,Silvicultura y explotación forestal
