@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 
-import pandas as pd
-from inline_sql import sql, sql_val
-import numpy as np
 
 
-
-padron= pd.read_csv("/home/tsl2004/Escritorio/labo-datos/tablas_originales_en_1raFN/Padron_en_3raFN.csv")
+padron= pd.read_csv("/home/tsl2004/Escritorio/labo-datos/tablas_originales/padron-de-operadores-organicos-certificados.csv")
 #dict_salario = pd.read_csv("")
 localidades_censales =  pd.read_csv("localidades-censales.csv")
 dict_deptos =  pd.read_csv("diccionario_cod_depto.csv")
