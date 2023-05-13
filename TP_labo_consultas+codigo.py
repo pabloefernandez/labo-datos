@@ -38,12 +38,10 @@ consulta3 =
                 """
                 SELECT padron.rubro, COUNT(*)
                 FROM padron
-                INNER JOIN tabla_productos_en_1FN
-                ON establecimiento = establecimiento and razon_social = razon_social
                 INNER JOIN rubro.rubro_clae2
-                ON rubro_clae_2
+                ON rubro_clae_2 = padron.rubro
                 GROUP BY rubro 
-               """
+                """
 ej3 = sql^consulta_3
             
 
