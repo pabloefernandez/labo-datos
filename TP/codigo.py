@@ -298,32 +298,32 @@ print(primera_forma_normal_rubro(PK_padron_y_rubro, tabla_rubros_en_1FN))
 
 #PADRON 3RA FORMA
 copia_padron = padron_correcto.copy()
-copia_padron = sql^("SELECT DISTINCT pais_id, provincia_id, departamento,localidad, rubro, categoria_id, Certificadora_id,razon_social, establecimiento FROM padron_correcto")
-tabla_paisid_U_pais = sql^ (" SELECT DISTINCT pais_id, pais FROM padron_correcto "  )
-tabla_provincia_id_U_provincia = sql^("SELECT DISTINCT provincia_id, provincia FROM padron_correcto")
-tabla_categoria_id_U_categoria_desc = sql^("SELECT DISTINCT categoria_id categoria_desc FROM padron_correcto")
-tabla_certificadora_id_U_certificadora_deno = sql^("SELECT DISTINCT Certificadora_id, certificadora_deno  FROM padron_correcto")
+copia_padron = sql^("SELECT DISTINCT pais_id, provincia_id, departamento,localidad, rubro, categoria_id, Certificadora_id,razon_social, establecimiento FROM padron_mod")
+tabla_paisid_U_pais = sql^ (" SELECT DISTINCT pais_id, pais FROM padron_mod "  )
+tabla_provincia_id_U_provincia = sql^("SELECT DISTINCT provincia_id, provincia FROM padron_mod")
+tabla_categoria_id_U_categoria_desc = sql^("SELECT DISTINCT categoria_id categoria_desc FROM padron_mod")
+tabla_certificadora_id_U_certificadora_deno = sql^("SELECT DISTINCT Certificadora_id, certificadora_deno  FROM padron_mod")
 
 #LOC_SENSALES
 copia_loc_censales = loc_cens.copy()
-copia_loc_censales= sql ^("SELECT categoria, centroide_Lat, centroide_Lon, departamento_nombre, fuente, id, municipio_id, nombre, provincia_id  FROM localidades_censales")
-tabla_depto_id_U_depto_nombre = sql^("SELECT DISTINCT departamento_id, departamento_nombre FROM localidades_censales")
-tabla_muni_id_U_muni_nombre = sql^("SELECT DISTINCT municipio_id, municipio_nombre FROM localidades_censales")
-tabla_prov_id_U_prov_nombre1 = sql^("SELECT DISTINCT provincia_id, provincia_nombre FROM localidades_censales")
-tabla_prov_id_U_depto_id_U_muni_id = sql^("SELECT DISTINCT provincia_id, departamento_id, municipio_id FROM localidades_censales")
+copia_loc_censales= sql ^("SELECT categoria, centroide_Lat, centroide_Lon, departamento_nombre, fuente, id, municipio_id, nombre, provincia_id  FROM localidades_censales_original")
+tabla_depto_id_U_depto_nombre = sql^("SELECT DISTINCT departamento_id, departamento_nombre FROM localidades_censales_original")
+tabla_muni_id_U_muni_nombre = sql^("SELECT DISTINCT municipio_id, municipio_nombre FROM localidades_censales_original")
+tabla_prov_id_U_prov_nombre1 = sql^("SELECT DISTINCT provincia_id, provincia_nombre FROM localidades_censales_original")
+tabla_prov_id_U_depto_id_U_muni_id = sql^("SELECT DISTINCT provincia_id, departamento_id, municipio_id FROM localidades_censales_original")
 
 
 #DICT_DEPTOS
 copia_dict_deptos = dict_deptos.copy()
-copia_dict_deptos = sql^("SELECT codigo_departamento_indec, id_provincia_indec FROM dict_deptos ")
-tabla_prov_id_U_prov_nombre2 = sql^("SELECT DISTINCT id_provincia_indec, nombre_provincia_indec FROM dict_deptos")
-tabla_codigo_depto_U_nombre_depto = sql^("SELECT DISTINCT codigo_departamento_indec, nombre_departamento_indec FROM dict_deptos")
+copia_dict_deptos = sql^("SELECT codigo_departamento_indec, id_provincia_indec FROM dict_deptos_original ")
+tabla_prov_id_U_prov_nombre2 = sql^("SELECT DISTINCT id_provincia_indec, nombre_provincia_indec FROM dict_deptos_original")
+tabla_codigo_depto_U_nombre_depto = sql^("SELECT DISTINCT codigo_departamento_indec, nombre_departamento_indec FROM dict_deptos_original")
 
 #DICT_ACT
 copia_dict_act = dict_act.copy()
-copia_dict_act =  sql^("SELECT clae2, letra FROM dict_act ")
-tabla_letra_U_letra_desc = sql^("SELECT DISTINCT letra, letra_desc FROM dict_act")
-tabla_clae2_U_clae2 = sql^("SELECT DISTINCT clae2, clae2_desc FROM dict_act")
+copia_dict_act =  sql^("SELECT clae2, letra FROM dict_act_original ")
+tabla_letra_U_letra_desc = sql^("SELECT DISTINCT letra, letra_desc FROM dict_act_original")
+tabla_clae2_U_clae2 = sql^("SELECT DISTINCT clae2, clae2_desc FROM dict_act_original")
 
 
 
