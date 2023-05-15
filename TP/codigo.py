@@ -79,7 +79,7 @@ consulta_deptos_de_mas = """
                 """
 tabla_consulta2 = sql^consulta_deptos_de_mas
 
-# me fijo coincidencias entre depatos de padron(t_cons.2) y munucipios de loc sensales
+# me fijo coincidencias entre deptos de padron(t_cons.2) y munucipios de loc sensales
 consulta_deptos_que_son_muni =  """
                 SELECT DISTINCT loc_cens.municipio_nombre ,loc_cens.departamento_nombre,  loc_cens.provincia_id, 
                 FROM loc_cens
