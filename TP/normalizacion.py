@@ -14,7 +14,7 @@ padron = pd.read_csv("./tablas_creadas/tablas_originales_normlizadas_y_limpiadas
 padron_original = pd.read_csv("./tablas_originales/padron-de-operadores-organicos-certificados.csv", encoding= 'windows-1252')
 padron_limpiado=  pd.read_csv("./tablas_creadas/padron_limpiado.csv")
 localidades_censales_original = pd.read_csv("./tablas_originales/localidades-censales.csv")
-loc_cens_limpiado = pd.read_csv("./localidades-censales_limpiado.csv")
+loc_cens_limpiado = pd.read_csv("./tablas_creadas/localidades-censales_limpiado.csv")
 dict_deptos_original  = pd.read_csv("./tablas_originales/diccionario_cod_depto.csv")
 dict_act_original  = pd.read_csv("./tablas_originales/diccionario_clae2.csv")
 clae2_original  = pd.read_csv("./tablas_originales/w_median_depto_priv_clae2.zip")
@@ -58,7 +58,7 @@ def primera_forma_normal_rubro(df,nuevo_df):
     return nuevo_df
 
 print(primera_forma_normal_rubro(PK_padron_y_rubro, tabla_rubros_en_1FN))
-tabla_rubros_en_1FN.to_csv("rubros_en1FN", index = False)
+#tabla_rubros_en_1FN.to_csv("rubros_en1FN", index = False)
 
 
 
@@ -95,7 +95,6 @@ tabla_clae2_U_clae2 = sql^("SELECT DISTINCT clae2, clae2_desc FROM dict_act_orig
 
 
 
-copia_padron.to_csv("Padron_en_3raFN_y_1raFN.csv", index = False)
 
 #PADRON 3RA FORMA A CSV 
 """
