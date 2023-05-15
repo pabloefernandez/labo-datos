@@ -66,9 +66,41 @@ padroncito = sql^(" SELECT razon_social,establecimiento, rubro FROM padron")
 tabla_productos_modificada  = pd.DataFrame(columns=['establecimiento' , 'razon_social', 'productos'])
 
 
+#Consultas para saber pk de padron
 
+consulta_1 = """
+                SELECT DISTINCT * 
+                FROM padron;
+             """
 
-                                  
+ej1 = sql^consulta_1
+
+consulta_2 = """
+                SELECT DISTINCT establecimiento, razon_social 
+                FROM padron;
+             """
+
+ej2 = sql^consulta_2
+
+#Y sabíamos que, de ser pk razon_social y establecimiento, la cantidad de filas debía coincidir.
+
+#Consultas para saber pk de localidades_censales
+
+consulta_1 = """
+                SELECT DISTINCT * 
+                FROM localidades_censales;
+             """
+
+ej1 = sql^consulta_1
+
+consulta_2 = """
+                SELECT DISTINCT id
+                FROM padron;
+             """
+
+ej2 = sql^consulta_2
+
+#Mismo concepto que en la anterior consulta
                                   
 
 #FUNCIONES  
