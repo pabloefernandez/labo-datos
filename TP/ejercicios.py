@@ -79,8 +79,12 @@ consulta4 = '''
     '''
 
 print(sql ^ consulta4)
+
 nacional = '''SELECT YEAR(CAST(fecha AS DATE)) as fecha,AVG(w_median) promedio_anual,stddev(w_median) AS desvio_estandar FROM clae2_original GROUP BY YEAR(CAST(fecha AS DATE)) ORDER BY fecha'''
 print(sql^nacional)
+con = '''SELECT YEAR(CAST(fecha AS DATE)) as fecha,AVG(w_median) promedio_anual,stddev(w_median) AS desvio_estandar FROM clae2_original GROUP BY YEAR(CAST(fecha AS DATE)) ORDER BY fecha'''
+print(sql^con)
+
 provincial = '''
                 SELECT YEAR(CAST(fecha AS DATE)) as fecha,p.provincia as provincia,AVG(w_median) AS promedio_anual_provincial,stddev(w_median) AS desvio_estandar FROM clae2_original c2 INNER JOIN provincias_padron p 
                 ON p.provincia_id = c2.id_provincia_indec GROUP BY YEAR(CAST(fecha AS DATE)),p.provincia ORDER BY YEAR(CAST(fecha AS DATE))
