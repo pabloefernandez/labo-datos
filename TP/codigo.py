@@ -27,8 +27,27 @@ deptos_loc_cens = pd.read_csv("./tablas_creadas/3ra_FN/loc_sensales/tabla_depto_
 rubro_unitario_clae2 = pd.read_csv("./tablas_creadas/rubro_unitario_clae2.csv")
 rubros_padron = pd.read_csv("./tablas_creadas/1ra_FN/padron/rubros_en1FN.csv")
 
+padron_poco_limpiado = padron_original.copy()
+#Limpieza establecimientos mal subidoscon NC en establecimiento
+padron_poco_limpiado.rename(columns={padron_poco_limpiado.columns[16]: 'establecimiento2'},inplace=True)
+
+filtro = padron_poco_limpiado["establecimiento2"].isna()
+
+padron_poco_limpiado = padron_poco_limpiado[filtro]
+padron_poco_limpiado = padron_poco_limpiado.iloc[:, :-3]
+            #Consulta X
+consulta_sacar_NC = """
+                    SELECT *
+                    FROM padron_poco_limpiado
+                    WHERE  padron_poco_limpiado.establecimiento != 'NC'
+
+                    """
+padron_poco_limpiado= sql^consulta_sacar_NC
+
 
 # Se estandarizan algunas columnas importantes
+
+padron_mod = padron_poco_limpiado.copy()
 
 sin_tildes = """
             SELECT REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(padron_mod.departamento,'á','a'),'é','e'),'í','i'),'ó','o'),'ú','u') as departamento, 
@@ -79,7 +98,7 @@ consulta_deptos_de_mas = """
                 """
 tabla_consulta2 = sql^consulta_deptos_de_mas
 
-# me fijo coincidencias entre deptos de padron(t_cons.2) y munucipios de loc sensales
+# me fijo coincidencias entre depatos de padron(t_cons.2) y munucipios de loc sensales
 consulta_deptos_que_son_muni =  """
                 SELECT DISTINCT loc_cens.municipio_nombre ,loc_cens.departamento_nombre,  loc_cens.provincia_id, 
                 FROM loc_cens
@@ -127,7 +146,7 @@ def cambiar_valores_a_partir_de_tabla3(p_copia,tabla3):
     return p_copia 
 padron_mod = cambiar_valores_a_partir_de_tabla3(p_copia,tabla_consulta3) #Padron_mod tiene la columna departamento limpiada!!
 
-#p_final.to_csv("padron_con_deptos_correctos.csv",index= False)
+padron_mod.to_csv("padron_limpiado.csv",index= False)
 
 
 
@@ -250,115 +269,6 @@ ej4 = sql^(provincial)
 
 
 
-
-
-#FUNCIONES UTILZADAS PARA SEPARAR LA TABLA PADRON EN 1FN
-#Se separa el atributo "productos" en una nueva tabla
-PK_padron_y_productos = sql^(" SELECT razon_social,establecimiento, productos FROM padron_mod")
-tabla_productos_en_1FN  = pd.DataFrame(columns=['establecimiento' , 'razon_social', 'productos'])
-
-def primera_forma_normal_productos(df,nuevo_df):
-   for i in range(len(df)):
-        if df.iloc[i,2] == "" or type(df.iloc[i,2] ) == float :
-           continue
-        productos = re.split(" Y | y |/|,",df.iloc[i,2])
-        for producto in productos:
-            producto = producto.lstrip()
-            nuevo_df.loc[len(nuevo_df)] = [df.iloc[i,0],df.iloc[i,1],producto] 
-   return nuevo_df
-
-
-print(primera_forma_normal_productos(PK_padron_y_productos, tabla_productos_en_1FN))
-#tabla_productos_en_1FN.to_csv("tabla_productos_mod.csv",index= False)
-
-#Se separa el atributo "rubro" en una nueva tabla
-
-PK_padron_y_rubro = sql^(" SELECT razon_social,establecimiento, rubro FROM padron_mod")
-tabla_rubros_en_1FN  = pd.DataFrame(columns=['establecimiento' , 'razon_social', 'rubro'])
-
-def primera_forma_normal_rubro(df,nuevo_df):
-    for i in range(len(df)):
-        if df.iloc[i,2] == "" or type(df.iloc[i,2] ) == float :
-            continue
-        rubros = re.split(" Y | y |/",df.iloc[i,2])
-        for rubro in rubros:
-            if rubro != "" :
-                rubro = rubro.lstrip()
-                nuevo_df.loc[len(nuevo_df)] = [df.iloc[i,0],df.iloc[i,1],rubro] 
-    return nuevo_df
-
-print(primera_forma_normal_rubro(PK_padron_y_rubro, tabla_rubros_en_1FN))
-#tabla_rubros_en_1FN.to_csv("rubros_en1FN", index = False)
-
-
-
-
-#CODIGO PARA PASAR CADA TABLA A 3FN. Donde dice "copia" y luego la tabla nos refiermos a la tabla orignal a la que se le separan las columnas que tiene una DF transitiva, estando entonces la tabla en 3FN.
-
-
-#PADRON 3RA FORMA
-copia_padron = padron_correcto.copy()
-copia_padron = sql^("SELECT DISTINCT pais_id, provincia_id, departamento,localidad, rubro, categoria_id, Certificadora_id,razon_social, establecimiento FROM padron_mod")
-tabla_paisid_U_pais = sql^ (" SELECT DISTINCT pais_id, pais FROM padron_mod "  )
-tabla_provincia_id_U_provincia = sql^("SELECT DISTINCT provincia_id, provincia FROM padron_mod")
-tabla_categoria_id_U_categoria_desc = sql^("SELECT DISTINCT categoria_id categoria_desc FROM padron_mod")
-tabla_certificadora_id_U_certificadora_deno = sql^("SELECT DISTINCT Certificadora_id, certificadora_deno  FROM padron_mod")
-
-#LOC_SENSALES
-copia_loc_censales = loc_cens.copy()
-copia_loc_censales= sql ^("SELECT categoria, centroide_Lat, centroide_Lon, departamento_nombre, fuente, id, municipio_id, nombre, provincia_id  FROM localidades_censales_original")
-tabla_depto_id_U_depto_nombre = sql^("SELECT DISTINCT departamento_id, departamento_nombre FROM localidades_censales_original")
-tabla_muni_id_U_muni_nombre = sql^("SELECT DISTINCT municipio_id, municipio_nombre FROM localidades_censales_original")
-tabla_prov_id_U_prov_nombre1 = sql^("SELECT DISTINCT provincia_id, provincia_nombre FROM localidades_censales_original")
-tabla_prov_id_U_depto_id_U_muni_id = sql^("SELECT DISTINCT provincia_id, departamento_id, municipio_id FROM localidades_censales_original")
-
-
-#DICT_DEPTOS
-copia_dict_deptos = dict_deptos.copy()
-copia_dict_deptos = sql^("SELECT codigo_departamento_indec, id_provincia_indec FROM dict_deptos_original ")
-tabla_prov_id_U_prov_nombre2 = sql^("SELECT DISTINCT id_provincia_indec, nombre_provincia_indec FROM dict_deptos_original")
-tabla_codigo_depto_U_nombre_depto = sql^("SELECT DISTINCT codigo_departamento_indec, nombre_departamento_indec FROM dict_deptos_original")
-
-#DICT_ACT
-copia_dict_act = dict_act.copy()
-copia_dict_act =  sql^("SELECT clae2, letra FROM dict_act_original ")
-tabla_letra_U_letra_desc = sql^("SELECT DISTINCT letra, letra_desc FROM dict_act_original")
-tabla_clae2_U_clae2 = sql^("SELECT DISTINCT clae2, clae2_desc FROM dict_act_original")
-
-
-
-
-
-
-
-#PADRON 3RA FORMA A CSV 
-copia_padron.to_csv("Padron_en_3raFN(falta_rubro).csv", index = False)
-
-tabla_paisid_U_pais.to_csv("tabla_pais_id_U_paiss.csv" ,index= False)
-tabla_provincia_id_U_provincia.to_csv("tabla_provincia_id_U_provincianocs.csv",index= False)
-tabla_categoria_id_U_categoria_desc.to_csv("tabla_categoria_id_U_categoria_desc.csv",index= False)
-tabla_certificadora_id_U_certificadora_deno.to_csv("tabla_certificadora_id_U_certificadora_deno.csv",index= False)
-
-
-#LOC_SENSALES
-copia_loc_censales.to_csv("loc_sensales_1raFN.csv", index = False)
-
-tabla_depto_id_U_depto_nombre.to_csv("tabla_depto_id_U_depto_nombre.csv",index= False)
-tabla_muni_id_U_muni_nombre.to_csv("tabla_muni_id_U_muni_nombre.csv",index= False)
-tabla_prov_id_U_prov_nombre1.to_csv("tabla_prov_id_U_prov_nombre1.csv",index= False)
-tabla_prov_id_U_depto_id_U_muni_id.to_csv("tabla_prov_id_U_depto_id_U_muni_id.csv",index= False)
-
-#DICT_DEPTOS
-copia_dict_deptos.to_csv("dict_deptos_1raFN.csv", index = False)
-
-tabla_prov_id_U_prov_nombre2.to_csv("tabla_prov_id_U_prov_nombre2.csv",index = False)
-tabla_codigo_depto_U_nombre_depto.to_csv("tabla_codigo_depto_U_nombre_depto.csv", index = False)
-
-#DICT_ACT
-copia_dict_act.to_csv("dict_act_1raFN.csv",index= False)
-
-tabla_letra_U_letra_desc.to_csv("tabla_letra_U_letra_desc.csv",index= False)
-tabla_clae2_U_clae2.to_csv("tabla_clae2_U_clae2.csv",index= False)
 
 
 

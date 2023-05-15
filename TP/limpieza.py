@@ -5,6 +5,8 @@ Created on Sat May 13 15:30:40 2023
 
 @author: tsl2004
 """
+
+
 import pandas as pd
 from inline_sql import sql, sql_val
 import numpy as np
@@ -13,38 +15,47 @@ import re
 
 padron = pd.read_csv("./tablas_creadas/tablas_originales_normlizadas_y_limpiadas/Padron_en_3raFN_y_1raFN.csv")
 padron_original = pd.read_csv("./tablas_originales/padron-de-operadores-organicos-certificados.csv", encoding= 'windows-1252')
+padron_poco_limpiado_bien_codificado = pd.read_csv("./tablas_originales/padron-de-operadores-organicos-certificados_en_UTF.csv")
 padron_mod=  pd.read_csv("./tablas_creadas/padron-de-operadores-organicos-certificados_mod.csv")
 localidades_censales_original = pd.read_csv("./tablas_originales/localidades-censales.csv")
 loc_cens = pd.read_csv("./tablas_creadas/tablas_originales_normlizadas_y_limpiadas/loc_sensales_1raFN.csv")
+loc_cens_limpiado = pd.read_csv("./localidades-censales_limpiado.csv")
 dict_deptos_original  = pd.read_csv("./tablas_originales/diccionario_cod_depto.csv")
 dict_act_original  = pd.read_csv("./tablas_originales/diccionario_clae2.csv")
 clae2_original  = pd.read_csv("./tablas_originales/w_median_depto_priv_clae2.zip")
-#Ex provincias
-provincias_padron = pd.read_csv("./tablas_creadas/3ra_FN/padron/tabla_provincia_id_U_provincia.csv") 
-#ex deptos
-deptos_loc_cens = pd.read_csv("./tablas_creadas/3ra_FN/loc_sensales/tabla_depto_id_U_depto_nombre.csv") 
-#ex rubro_clae2
-rubro_unitario_clae2 = pd.read_csv("./tablas_creadas/rubro_unitario_clae2.csv")
-rubros_padron = pd.read_csv("./tablas_creadas/1ra_FN/padron/rubros_en1FN.csv")
+
+
+#LIMPIEZA
 
 padron_poco_limpiado = padron_original.copy()
-#Limpieza establecimientos mal subidoscon NC en establecimiento
+#Limpieza establecimientos mal subidos con NC en establecimiento
 padron_poco_limpiado.rename(columns={padron_poco_limpiado.columns[16]: 'establecimiento2'},inplace=True)
 
 filtro = padron_poco_limpiado["establecimiento2"].isna()
 
 padron_poco_limpiado = padron_poco_limpiado[filtro]
 padron_poco_limpiado = padron_poco_limpiado.iloc[:, :-3]
-            #Consulta X
+
+#Limpieza de los -99 en los salarios de clae_2
+consulta_sacar_99 = """
+                    SELECT *
+                    FROM clae2_original
+                    where w_median > 0
+
+                    """
+clae_sin_99 = sql^consulta_sacar_99
+
 consulta_sacar_NC = """
                     SELECT *
                     FROM padron_poco_limpiado
                     WHERE  padron_poco_limpiado.establecimiento != 'NC'
 
                     """
+padron_poco_limpiado = padron_poco_limpiado_bien_codificado
 padron_poco_limpiado= sql^consulta_sacar_NC
+padron_poco_limpiado = padron_poco_limpiado_bien_codificado
 
-
+#SECCION ESTANDARIZACION
 # Se estandarizan algunas columnas importantes
 
 padron_mod = padron_poco_limpiado.copy()
@@ -58,35 +69,36 @@ padron_mod["departamento"]=tabla_arreglo["departamento"]
 
 
 sin_tildes_loc = """
-            SELECT UPPER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(loc_cens.departamento_nombre,'á','a'),'é','e'),'í','i'),'ó','o'),'ú','u')) as departamento_loc
-            FROM loc_cens  
+            SELECT UPPER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(loc_cens_limpiado.departamento_nombre,'á','a'),'é','e'),'í','i'),'ó','o'),'ú','u')) as departamento_loc
+            FROM loc_cens_limpiado  
             """     
 tabla_arreglo_loc = sql^sin_tildes_loc
-loc_cens["departamento_nombre"] = tabla_arreglo_loc["departamento_loc"]
+loc_cens_limpiado["departamento_nombre"] = tabla_arreglo_loc["departamento_loc"]
 
 sin_tildes_loc_en_muni = """
-                    SELECT UPPER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(loc_cens.nombre,'á','a'),'é','e'),'í','i'),'ó','o'),'ú','u')) as municipio_nombre
-                    FROM loc_cens  
+                    SELECT UPPER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(loc_cens_limpiado.municipio_nombre,'á','a'),'é','e'),'í','i'),'ó','o'),'ú','u')) as municipio_nombre
+                    FROM loc_cens_limpiado  
                     """
                     
 tabla_arreglo_loc_muni = sql^sin_tildes_loc_en_muni
 
-loc_cens["municipio_nombre"] = tabla_arreglo_loc_muni["municipio_nombre"]
+loc_cens_limpiado["municipio_nombre"] = tabla_arreglo_loc_muni["municipio_nombre"]
 
 
 
 
 #LIMPIEZA ATRIBUTO DEPARTAMENTOS DE PADRON 
+#Nos fijamos que que departamentos en el atributo departamentos de apdron son verdaderamente departamentos
 consulta_deptos = """
-                SELECT DISTINCT padron_mod.departamento, loc_cens.provincia_id
+                SELECT DISTINCT padron_mod.departamento, loc_cens_limpiado.provincia_id
                 FROM padron_mod
-                INNER JOIN loc_cens
-                ON UPPER(padron_mod.departamento) = UPPER(loc_cens.departamento_nombre)
+                INNER JOIN loc_cens_limpiado
+                ON UPPER(padron_mod.departamento) = UPPER(loc_cens_limpiado.departamento_nombre)
                 
                 """
 tabla_consulta = sql^consulta_deptos
 
-                
+#Nos fijamos que valores de departamentos en padron no son en realidad departamentos                 
 consulta_deptos_de_mas = """
                 SELECT padron_mod.departamento 
                 FROM padron_mod
@@ -98,16 +110,16 @@ consulta_deptos_de_mas = """
                 """
 tabla_consulta2 = sql^consulta_deptos_de_mas
 
-# me fijo coincidencias entre depatos de padron(t_cons.2) y munucipios de loc sensales
+# Nos fijamos coincidencias entre departamentos de padron y municipios de loc sensales
 consulta_deptos_que_son_muni =  """
-                SELECT DISTINCT loc_cens.municipio_nombre ,loc_cens.departamento_nombre,  loc_cens.provincia_id, 
-                FROM loc_cens
+                SELECT DISTINCT loc_cens_limpiado.municipio_nombre ,loc_cens_limpiado.departamento_nombre,  loc_cens_limpiado.provincia_id,
+                FROM loc_cens_limpiado
                 INNER JOIN tabla_consulta2
-                ON UPPER(loc_cens.municipio_nombre ) = UPPER(tabla_consulta2.departamento) 
+                ON UPPER(loc_cens_limpiado.municipio_nombre ) = UPPER(tabla_consulta2.departamento) 
                 
                 """
 tabla_consulta3 = sql^consulta_deptos_que_son_muni
-
+#Nos fijamos los valores en el atributo departamentos que no son ni departamentos ni municipios
 consulta_cosas_raras = """
                 SELECT DISTINCT UPPER(tabla_consulta2.departamento) as departamento
                 FROM tabla_consulta2
@@ -134,11 +146,10 @@ padron_mod = sql^consulta_eliminacion
 
 
 p_copia = padron_mod.copy()
-#loc_copia= localidades_sensales.copy()
-print(tabla_consulta3.iloc[4,1] == p_copia.iloc[5,2])
+
 
 def cambiar_valores_a_partir_de_tabla3(p_copia,tabla3):
-    for i in range(len(padron)):
+    for i in range(len(p_copia)):
         for j in range(len(tabla3)):
             if p_copia.iloc[i,4] == tabla3.iloc[j,0] and (p_copia.iloc[i,2] == tabla3.iloc[j,2]): #ME IMPORTAN LAS PROVINCIAS
                 p_copia.iloc[i,4] = tabla3.iloc[j,1]
@@ -165,68 +176,9 @@ padron_mod.to_csv("padron_limpiado.csv",index= False)
 
 
 
-# codigo para las consultas del ejercicio hi) 
-        #Ejercicio i)
-
-consulta_1 = """
-                SELECT DISTINCT provincias_padron.provincia, count(*) as cant_operadores 
-                FROM padron
-                INNER JOIN provincias_padron
-                ON provincias_padron.provincia_id = padron.provincia_id
-                GROUP BY provincias_padron.provincia;
 
 
-             """
 
-ej1 = sql^consulta_1
-#print(ej1)
-
-consultaa = '''
-SELECT UPPER(REPLACE(REPLACE(REPLACE(REPLACE(REPLACE(localidades_sensales.departamento_nombre,'á','a'),'é','e'),'í','i'),'ó','o'),'ú','u')) as departamento_loc'''
-
-        #Ejercicio ii)
-
-consulta2 = """
-            
-                SELECT DISTINCT loc_cens.departamento_nombre
-                FROM loc_cens
-                EXCEPT(
-                    SELECT DISTINCT padron.departamento
-                    FROM padron
-                    )
-
-                """
-ej2 = sql^consulta2
-print(ej2)
-        #Ejercicio iii)
-
-consulta3 = """
-                    SELECT DISTINCT rc2.clae2,rc2.clae2_desc, COUNT(*)
-                    FROM rubros_padron rp
-                    INNER JOIN rubro_unitario_clae2 rc2 ON rc2.rubro = rp.rubro
-                    GROUP BY rc2.clae2_desc,rc2.clae2 
-                    """
-ej3 = sql ^ consulta3
-    
-    
-    
-    #Ejercicio iv)
-actividad = ej3.iloc[0,0]
-actividad = str(actividad)
-consulta4 = '''
-                SELECT AVG(w_median) AS promedio FROM clae2_original 
-                WHERE clae2 = $actividad AND fecha = '2022-12-01' AND w_median > 0
-    '''
-
-print(sql ^ consulta4)
-con = '''SELECT YEAR(CAST(fecha AS DATE)) as fecha,AVG(w_median) promedio_anual,stddev(w_median) AS desvio_estandar FROM clae2_original GROUP BY YEAR(CAST(fecha AS DATE)) ORDER BY fecha'''
-print(sql^con)
-provincial = '''
-                SELECT YEAR(CAST(fecha AS DATE)) as fecha,p.provincia as provincia,AVG(w_median) AS promedio_anual_provincial,stddev(w_median) AS desvio_estandar FROM clae2_original c2 INNER JOIN provincias_padron p 
-                ON p.provincia_id = c2.id_provincia_indec GROUP BY YEAR(CAST(fecha AS DATE)),p.provincia ORDER BY YEAR(CAST(fecha AS DATE))
-    
-    '''
-ej4 = sql^(provincial)
 
 
 
