@@ -156,7 +156,7 @@ def cambiar_valores_a_partir_de_tabla3(p_copia,tabla3):
     return p_copia 
 padron_mod = cambiar_valores_a_partir_de_tabla3(p_copia,tabla_consulta3) #Padron_mod tiene la columna departamento limpiada!!
 
-padron_mod.to_csv("padron_limpiado.csv",index= False)
+#padron_mod.to_csv("padron_limpiado.csv",index= False)
 
 
 
