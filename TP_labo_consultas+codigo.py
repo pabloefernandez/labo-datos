@@ -101,7 +101,46 @@ consulta_2 = """
 ej2 = sql^consulta_2
 
 #Mismo concepto que en la anterior consulta
-                                  
+
+
+#Consultas para saber si padron se encuentra en 3FN por provincia
+
+consulta_1 = """
+                SELECT DISTINCT provincia_id
+                FROM padron;
+             """
+
+ej1 = sql^consulta_1
+
+
+consulta_2 = """
+                SELECT DISTINCT provincia_id, provincia
+                FROM padron;
+             """
+
+ej2 = sql^consulta_2
+
+#Si la cantidad de filas resulta igual en ambas consultas es porque pronvincia_id ----> provincia
+
+
+#Consultas para saber si padron se encuentra en 3FN por país
+
+consulta_1 = """
+                SELECT DISTINCT pais_id
+                FROM padron;
+             """
+
+ej1 = sql^consulta_1
+
+
+consulta_2 = """
+                SELECT DISTINCT pais_id, pais
+                FROM padron;
+             """
+
+ej2 = sql^consulta_2
+
+#Si la cantidad de filas resulta igual en ambas consultas es porque pais_id ----> pais
 
 #FUNCIONES  
   
