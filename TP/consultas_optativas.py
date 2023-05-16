@@ -51,6 +51,8 @@ pk_loc_cens2 = sql^consulta_2
 
 
 
+
+
 #Otra consulta para comprobar en la tabla LC depto+municipio--->provincia, es decir que existe una DF desde depto+municipio hacia provincia
 consulta_de_provincia_misma_dep_y_muni ="""
     SELECT DISTINCT provincia_nombre, departamento_id, municipio_id , 
